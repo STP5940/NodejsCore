@@ -7,7 +7,13 @@ class RateLimiter {
         return rateLimit({
             windowMs: 60 * 1000, // 1 minute
             max: 8, // Limit 8 request per minute
-            message: 'Too many login this IP, please try again after a minute.'
+            // message: 'Too many requests from this IP, please try again later.'
+            handler: (req, res, next) => {
+                res.status(429).json({
+                    status: false,
+                    message: 'Too many requests from this IP, please try again later.'
+                });
+            }
         });
     }
 }

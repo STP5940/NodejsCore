@@ -16,7 +16,6 @@ exports.show = async function (req, res, next) {
     res.setHeader("Content-Type", "application/json");
     return res.status(200).json({
       status: true,
-      // datetime: func.getFormatDate('YYYY-MM-DD HH:mm:ss'),
       message: "Show Success",
       username: accessTokenverified?.username,
     });

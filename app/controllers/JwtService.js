@@ -43,7 +43,7 @@ class JwtService {
      */
     verifyAccessToken(bearerToken) {
         if (typeof bearerToken !== 'string' || !bearerToken.startsWith('Bearer ')) {
-            throw new MsgError('Invalid Authorization header format', 400);
+            throw new MsgError('Invalid Authorization header', 400);
         }
 
         try {
@@ -64,8 +64,9 @@ class JwtService {
      * @throws {MsgError} - Error เมื่อ token ไม่ถูกต้องหรือหมดอายุ
      */
     verifyRefreshToken(bearerToken) {
+        
         if (typeof bearerToken !== 'string' || !bearerToken.startsWith('Bearer ')) {
-            throw new MsgError('Invalid Authorization header format', 400);
+            throw new MsgError('Invalid Authorization header', 400);
         }
 
         try {
