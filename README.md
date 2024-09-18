@@ -1,1 +1,1 @@
-![Welcome to Index](./public/Index.png)
+![Welcome to Index](./public/Index.gif)
