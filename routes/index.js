@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/index", (req, res) => {
-    res.render("homepage");
+    res.render("homepage", { serverMode: req.app.get('env') });
 });
 
 module.exports = app;

@@ -8,9 +8,7 @@ const RateLimiter = require('../app/controllers/RateLimiter');
 const AuthController = require('../app/controllers/AuthController');
 
 app.post('/login', [
-    RateLimiter.loginLimit(),
-    Validator.usernameRequired(),
-    Validator.passwordRequired()
+    RateLimiter.loginLimit(), Validator.usernameRequired(), Validator.passwordRequired()
 ], Validator.validationResult, AuthController.login);
 
 app.post('/refresh', AuthController.refresh);

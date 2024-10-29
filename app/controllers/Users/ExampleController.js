@@ -1,85 +1,72 @@
-// const T_Users = require("../../Models/T_Users");
-// const Authen = require("../../Authen");
-// const func = require("../../func");
+const dateTime = require("../DateTime");
 
-const JwtService = require('../JwtService');
-const { validationResult } = require("express-validator");
+module.exports = {
+  get: async (req, res) => {
+    try {
+      // const dataUse = Authen.decodeJwt(req.headers.authorization);
 
-// Secret key for signing the JWT
-const jwtService = new JwtService();
+      res.setHeader("Content-Type", "application/json");
+      return res.status(200).json({
+        status: true,
+        message: "Show Success",
+        dateTime: dateTime.formatDateTimeNow("YYYY-MM-DD HH:mm:ss"),
+      });
+    } catch ({ name, message, httpcode }) {
+      res.status(httpcode || 500).json({
+        status: false,
+        message: message,
+      });
+    }
+  },
 
-// Users show
-exports.show = async function (req, res, next) {
-  try {
-    const accessTokenverified = jwtService.verifyAccessToken(req.headers?.authorization);
+  create: async (req, res) => {
+    try {
+      // const dataUse = Authen.decodeJwt(req.headers.authorization);
 
-    res.setHeader("Content-Type", "application/json");
-    return res.status(200).json({
-      status: true,
-      message: "Show Success",
-      username: accessTokenverified?.username,
-    });
-  } catch ({ name, message, httpcode }) {
-    res.status(httpcode || 500).json({
-      status: false,
-      message: message,
-    });
-  }
-};
+      res.setHeader("Content-Type", "application/json");
+      return res.status(200).json({
+        status: true,
+        message: "Create Success",
+      });
+    } catch ({ name, message, httpcode }) {
+      res.status(httpcode || 500).json({
+        status: false,
+        message: message,
+      });
+    }
+  },
 
-// Users create
-exports.store = async function (req, res, next) {
-  try {
-    // let dataUse = Authen.decodeJwt(req.headers.authorization);
+  update: async (req, res) => {
+    try {
+      // const dataUse = Authen.decodeJwt(req.headers.authorization);
 
-    res.setHeader("Content-Type", "application/json");
-    return res.status(200).json({
-      status: true,
-      // datetime: func.getFormatDate('YYYY-MM-DD HH:mm:ss'),
-      message: "Store Success",
-    });
-  } catch ({ name, message, httpcode }) {
-    res.status(httpcode || 500).json({
-      status: false,
-      message: message,
-    });
-  }
-};
+      res.setHeader("Content-Type", "application/json");
+      return res.status(200).json({
+        status: true,
+        message: "Update Success",
+      });
+    } catch ({ name, message, httpcode }) {
+      res.status(httpcode || 500).json({
+        status: false,
+        message: message,
+      });
+    }
+  },
 
-// Users update
-exports.update = async function (req, res, next) {
-  try {
-    // let dataUse = Authen.decodeJwt(req.headers.authorization);
+  delete: async (req, res) => {
+    try {
+      // const dataUse = Authen.decodeJwt(req.headers.authorization);
 
-    res.setHeader("Content-Type", "application/json");
-    return res.status(200).json({
-      status: true,
-      // datetime: func.getFormatDate('YYYY-MM-DD HH:mm:ss'),
-      message: "Update Success",
-    });
-  } catch ({ name, message, httpcode }) {
-    res.status(httpcode || 500).json({
-      status: false,
-      message: message,
-    });
-  }
-};
-
-// Users delete
-exports.destroy = async function (req, res, next) {
-  try {
-    // let dataUse = Authen.decodeJwt(req.headers.authorization);
-
-    res.setHeader("Content-Type", "application/json");
-    return res.status(200).json({
-      status: true,
-      // datetime: func.getFormatDate('YYYY-MM-DD HH:mm:ss'),
-      message: "Destroy Success",
-    });
-  } catch ({ name, message, httpcode }) {
-    res.status(httpcode || 500).json({
-      status: false,
-      message: message,
-    });
-  }
+      res.setHeader("Content-Type", "application/json");
+      return res.status(200).json({
+        status: true,
+        message: "Delete Success",
+      });
+    } catch ({ name, message, httpcode }) {
+      res.status(httpcode || 500).json({
+        status: false,
+        message: message,
+      });
+    }
+  },
 };

@@ -1,9 +1,11 @@
 
 // การใช้งานตัวอย่าง
-// const dateTime = new DateTime();
+// const dateTime = require("../DateTime");
 
 // console.log(dateTime.formatDate());
 // console.log(dateTime.formatDate("DD-MM-YYYY"));
+
+const moment = require("moment");
 
 class DateTime {
     /**
@@ -12,7 +14,7 @@ class DateTime {
      * @param {string} [_format="YYYYMMDDHHmmss"] - รูปแบบของวันที่ที่ต้องการ (ค่าเริ่มต้นคือ "YYYYMMDDHHmmss")
      * @returns {string} วันที่ในรูปแบบที่ระบุ
      */
-    formatDate(_format = "YYYYMMDDHHmmss") {
+    static formatDateTimeNow(_format = "YYYYMMDDHHmmss") {
         const now = new Date();
         const formattedDate = moment(now).format(_format);
 
@@ -25,7 +27,7 @@ class DateTime {
      * @param {Date} _DateTime - วันที่และเวลาที่ต้องการแปลง
      * @returns {string} วันที่และเวลาในรูปแบบ ISO-8601
      */
-    formatDateSave(_DateTime) {
+    static formatDateSave(_DateTime) {
         const formattedDateTime = _DateTime.toISOString(); // ใช้ฟังก์ชัน toISOString() เพื่อรับวันที่และเวลาในรูปแบบ ISO-8601
 
         return formattedDateTime;
@@ -37,7 +39,7 @@ class DateTime {
      * @param {Date} _DateTime - วันที่และเวลาที่ต้องการดึงปี
      * @returns {string} ปีในรูปแบบ "YYYY"
      */
-    getYear(_DateTime) {
+    static getYear(_DateTime) {
         const now = _DateTime;
         const dateStringWithTime = moment(now).format("YYYY");
 
@@ -56,7 +58,7 @@ class DateTime {
      * fromUnixTimestamp(new Date().getTime());
      * fromUnixTimestamp(1688619561388);
      */
-    fromUnixTimestamp(_unixTimestamp) {
+    static fromUnixTimestamp(_unixTimestamp) {
         const date = new Date(_unixTimestamp);
         const months = [
             "Jan", "Feb", "Mar",
@@ -82,7 +84,7 @@ class DateTime {
      * @param {string} _dateStr - สตริงวันที่ ที่ต้องการแปลง
      * @returns {string} รูปแบบเดือนในภาษาไทย
      */
-    toThaiDate(_dateStr) {
+    static toThaiDate(_dateStr) {
         const date = new Date(_dateStr);
 
         const monthNamesThai = [
@@ -107,7 +109,7 @@ class DateTime {
      * @param {boolean} [_short=false] - กำหนดว่าจะแสดงชื่อเดือนแบบย่อหรือไม่ (ค่าเริ่มต้นคือแบบเต็ม)
      * @returns {string} เดือนในภาษาไทยแบบย่อ หรือแบบเต็ม
      */
-    toThaiDateTime(dateStr, short = false) {
+    static toThaiDateTime(dateStr, short = false) {
         const date = new Date(dateStr);
         const monthNamesThai = short
             ? ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."]
