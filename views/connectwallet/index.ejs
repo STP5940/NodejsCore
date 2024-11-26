@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>web3DApp</title>
+
+  <!-- Web3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+  <script src="/js/wallet.js" defer></script>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Styles -->
+  <style>
+    body,
+    html {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #FF9B9B, #FFB8D4, #D7A4FF);
+      color: #fff;
+      overflow: hidden;
+      /* ปิดการเลื่อนหน้าจอ */
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: bold;
+      color: #ffecf4;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      /* เพิ่มเงาขอบ */
+    }
+
+    .connectWalletBtn {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #FF77B4, #FF9B9B);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      margin-left: 10px;
+    }
+
+    .walletAddressBtn {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #FFC3E5, #FF77B4);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 25px rgba(255, 255, 255, 0.4);
+    }
+
+    button:disabled {
+      background: #FF9B9B;
+      cursor: not-allowed;
+    }
+
+    /* .loading {
+      display: none;
+      margin-top: 2rem;
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #FF77B4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    } */
+
+    /* .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1002;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading {
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #FF77B4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    } */
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .corner-image {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 250px;
+      height: auto;
+    }
+
+    #walletAddressBtn {
+      font-size: 1rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #FFC3E5, #FF77B4);
+    }
+
+    #walletInfo {
+      /* padding-bottom: 10rem; */
+      /* font-size: 4rem; */
+
+      padding-bottom: 5rem;
+      font-size: 4rem;
+      position: fixed;
+      /* หรือ absolute ตามความเหมาะสม */
+      top: 50%;
+      /* ตั้งตำแหน่งในแนวตั้ง */
+      left: 50%;
+      /* ตั้งตำแหน่งในแนวนอน */
+      transform: translate(-50%, -50%);
+      /* เพื่อจัดตำแหน่งให้ตรงกลาง */
+      z-index: 1001;
+      /* ให้มันอยู่ด้านบนสุดเพื่อไม่ให้ถูกทับด้วย SweetAlert */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="">
+      <h1>Web3 DApp</h1>
+    </a>
+    <div class="flex justify-between items-center">
+      <!-- ที่อยู่กระเป๋า -->
+      <button id="walletAddressBtn" class="walletAddressBtn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+        Wallet Address
+      </button>
+      <!-- เชื่อมต่อกระเป๋า -->
+      <button id="connectWalletBtn" class="connectWalletBtn bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+        Connect wallet
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- <div class="loading" id="loadingSpinner"></div> -->
+    <!-- <div class="loading-overlay">
+      <div class="loading" id="loadingSpinner"></div>
+    </div> -->
+    <p id="walletInfo"></p>
+  </div>
+  <img src="../../image/cat.gif" alt="Decorative GIF" class="corner-image">
+</body>
+
+</html>
