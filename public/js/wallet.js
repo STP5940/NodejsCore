@@ -32,7 +32,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", async () =
         walletInfo.innerText = "Hello World"; // Clear wallet balance
 
         connectWalletBtn.disabled = false;
-        connectWalletBtn.innerText = "Connect wallet";
+        connectWalletBtn.innerText = "Connect Wallet";
         connectWalletBtn.style.background = "linear-gradient(90deg, #FF77B4, #FF9B9B)";; // Reset background color
         // loadingSpinner.style.display = "none";
         // hideLoading();
@@ -80,13 +80,13 @@ document.getElementById("connectWalletBtn").addEventListener("click", async () =
 
     } catch (error) {
         console.error("Error connecting to wallet:", error);
-        alert("ไม่สามารถเชื่อมต่อ Wallet ได้");
-        // Swal.fire({
-        //     title: 'เกิดข้อผิดพลาด',
-        //     text: `ไม่สามารถเชื่อมต่อ Wallet ได้`,
-        //     icon: 'error', // Information icon
-        //     confirmButtonText: 'ตกลง',
-        //   });
+        // alert("ไม่สามารถเชื่อมต่อ Wallet ได้");
+        Swal.fire({
+            title: 'เกิดข้อผิดพลาด',
+            text: `ไม่สามารถเชื่อมต่อ Wallet ได้`,
+            icon: 'error', // Information icon
+            confirmButtonText: 'ตกลง',
+        });
     } finally {
         // loadingSpinner.style.display = "none";
         // hideLoading();
@@ -94,6 +94,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", async () =
 });
 
 // ซ่อนปุ่ม walletAddressBtn ตอนที่เริ่มต้น
+walletInfo.innerText = "Loading..."; // Clear wallet balance
 document.getElementById("walletAddressBtn").style.display = "none";
 // loadingSpinner.style.display = "block";
 // showLoading();

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>web3DApp</title>
+  <title>Foxy Lottery - Game</title>
 
   <!-- Web3.js -->
   <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
@@ -34,7 +34,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: 0.7rem 0.8rem;
       background: rgba(255, 255, 255, 0.2);
       position: fixed;
       top: 0;
@@ -45,11 +45,11 @@
     }
 
     .navbar h1 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin: 0;
       font-weight: bold;
-      color: #ffecf4;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      color: #fceef4;
+      text-shadow: -2px 2px 3px rgba(58, 174, 140, 0.9);
       /* เพิ่มเงาขอบ */
     }
 
@@ -90,60 +90,6 @@
       cursor: not-allowed;
     }
 
-    /* .loading {
-      display: none;
-      margin-top: 2rem;
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.3);
-      border-top: 6px solid #FF77B4;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    } */
-
-    /* .loading-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1002;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .loading {
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.3);
-      border-top: 6px solid #FF77B4;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    } */
-
     .content {
       display: flex;
       flex-direction: column;
@@ -169,9 +115,6 @@
     }
 
     #walletInfo {
-      /* padding-bottom: 10rem; */
-      /* font-size: 4rem; */
-
       padding-bottom: 5rem;
       font-size: 4rem;
       position: fixed;
@@ -191,8 +134,11 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar">
-    <a href="">
-      <h1>Web3 DApp</h1>
+    <a href="" class="flex items-center">
+      <!-- โลโก้ -->
+      <img src="../../image/logofox.png" alt="Logo" class="h-10 w-auto mr-2">
+      <!-- ชื่อเว็บไซต์ -->
+      <h1>The Foxy Lottery</h1>
     </a>
     <div class="flex justify-between items-center">
       <!-- ที่อยู่กระเป๋า -->
@@ -201,17 +147,13 @@
       </button>
       <!-- เชื่อมต่อกระเป๋า -->
       <button id="connectWalletBtn" class="connectWalletBtn bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-        Connect wallet
+        Connect Wallet
       </button>
     </div>
   </nav>
 
   <!-- Main Content -->
   <div class="content">
-    <!-- <div class="loading" id="loadingSpinner"></div> -->
-    <!-- <div class="loading-overlay">
-      <div class="loading" id="loadingSpinner"></div>
-    </div> -->
     <p id="walletInfo"></p>
   </div>
   <img src="../../image/cat.gif" alt="Decorative GIF" class="corner-image">
