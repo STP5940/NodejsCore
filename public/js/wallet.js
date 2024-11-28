@@ -12,6 +12,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", async () =
     if (!window.ethereum) {
         // alert("กรุณาติดตั้ง Metamask หรือ Wallet ที่รองรับ");
         Swal.fire({
+            // heightAuto: false,
             title: 'เกิดข้อผิดพลาด',
             text: `กรุณาติดตั้ง Metamask หรือ Wallet ที่รองรับ`,
             icon: 'error', // Information icon
